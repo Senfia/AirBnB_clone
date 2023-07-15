@@ -14,7 +14,7 @@ from console import HBNBCommand
 
 class TestConsole(unittest.TestCase):
     """
-    Create automated tests for interactive shell based on cmd module
+    Automated tests for interactive shell based on cmd module
     """
     def setUp(self):
         """setup method for Console Test Class"""
@@ -22,6 +22,7 @@ class TestConsole(unittest.TestCase):
         self.mock_stdout = create_autospec(sys.stdout)
 
     def create(self, server=None):
+        """Create command"""
         return HBNBCommand(stdin=self.mock_stdin, stdout=self.mock_stdout)
 
     def test_exit(self):
