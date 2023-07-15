@@ -10,6 +10,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class FileStorage:
     """Represent an abstracted storage engine."""
     __file_path = "file.json"
@@ -29,7 +30,7 @@ class FileStorage:
             json.dump(obj_dict, f)
 
     def reload(self):
-        """Deserialize the JSON file __file_path to __objects, if it exists"""
+        """Deserialize the JSON file __file_path to __objects"""
         try:
             with open(FileStorage.__file_path) as f:
                 obj_dict = json.load(f)
@@ -39,4 +40,4 @@ class FileStorage:
                     self.new(eval(class_name)(**o))
 
         except FileNotFoundError:
-            raise FileNotFoundError("File not found: {}".format(FileStorage.__file_path))
+            raise FileNotFoundError("File not found")
