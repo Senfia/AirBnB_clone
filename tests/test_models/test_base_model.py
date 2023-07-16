@@ -6,6 +6,8 @@ import unittest
 import uuid
 import datetime
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+import json
 
 
 class TestBaseModel(unittest.TestCase):
@@ -61,7 +63,7 @@ class TestBaseModel(unittest.TestCase):
     Test if to_json() returns a dictionary of __dict__
     """
     def test_to_json(self):
-        self.assertTrue(type(self.test1.to_json() is dict))
+        self.assertTrue(type(json.loads(self.test1) is dict))
 
 
 if __name__ == '__main__':

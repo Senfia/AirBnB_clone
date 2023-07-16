@@ -1,40 +1,49 @@
 #!/usr/bin/python3
-""" Tests the Amenity Subclass """
+"""
+This is Amenity class unittest module. This class tests Amenity class.
+"""
 import unittest
-from models.amenity import Amenity
+import uuid
 import datetime
+from models.amenity import Amenity
 
 
 class TestAmenity(unittest.TestCase):
-    """ Testing the Amenity """
+    """
+    Create object of Amenity class for testing.
+    """
     def setUp(self):
-        """ Create instances """
-        self.free_water = Amenity()
-        self.free_wifi = Amenity()
-        self.free_wifi.save()
+        self.water = Amenity()
+        self.wifi = Amenity()
 
-    def test_setup(self):
-        """ Test setup """
-        self.assertTrue(self.free_water.id != self.free_wifi.id)
-        self.assertFalse(hasattr(self.free_water, "updated_at"))
-        self.assertTrue(hasattr(self.free_water, "name"))
-        self.assertTrue(hasattr(self.free_wifi, "name"))
-        self.assertTrue(self.free_water.created_at !=
-                        self.free_wifi.created_at)
+    """
+    Test object attributes.
+    """
+    def test_attribute(self):
+        self.assertTrue(hasattr(self.water, "name"))
+        self.assertFalse(hasattr(self.wifi, "place"))
+        self.assertTrue(type(self.water.name) is str)
+        self.assertTrue(type(self.wifi.id) is str)
+        self.assertTrue(self.water.id != self.wifi.id)
+        test_created1 = self.water.created_at
+        test_created2 = self.wifi.created_at
+        self.assertIsNot(test_created1, test_created2)
+        self.assertTrue(type(test_created2) is datetime.datetime)
 
-    def test_types(self):
-        """ Types testing """
-        self.assertTrue(type(self.free_water.created_at) is
-                        datetime.datetime)
-        self.assertTrue(type(self.free_water.name) is str)
-        self.assertTrue(type(self.free_wifi.id) is str)
-
+    """
+    Test inherited methods.
+    """
     def test_save(self):
-        """ Updates testings"""
-        b_date = self.free_wifi.updated_at
-        self.free_wifi.save()
-        b_date2 = self.free_wifi.updated_at
-        self.assertTrue(b_date != b_date2)
+        test_updated = self.water.updated_at
+        self.water.save()
+        updated_save = self.water.updated_at
+        self.assertFalse(test_updated == updated_save)
+
+    """
+    Test dynamic method creation
+    """
+    def test_count(self):
+        self.assertFalse(hasattr(self.water, "do_count()"))
 
 
 if __name__ == '__main__':
