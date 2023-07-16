@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
 """
-Created on Fri Jun  5 15:43:09 2020
-@author: meco
+Unittest for base model
 """
 import sys
 import unittest
