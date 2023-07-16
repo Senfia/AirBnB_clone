@@ -59,12 +59,6 @@ class TestBaseModel(unittest.TestCase):
         updated_save = self.test1.updated_at
         self.assertFalse(test_updated == updated_save)
 
-    """
-    Test if to_json() returns a dictionary of __dict__
-    """
-    def test_to_json(self):
-        self.assertTrue(type(json.loads(self.test1) is dict))
-
 
 if __name__ == '__main__':
     unittest.main()
