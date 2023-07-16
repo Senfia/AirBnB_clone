@@ -16,12 +16,10 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """Catch commands if nothing else matches then."""
-        # print("DEF:::", line)
         self._precmd(line)
 
     def _precmd(self, line):
         """Intercepts commands to test for class.syntax()"""
-        # print("PRECMD:::", line)
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
         if not match:
             return line
@@ -169,26 +167,30 @@ class HBNBCommand(cmd.Cmd):
             print(len(matches))
 
     def do_update(self, line):
-        """Updates an instance by adding or updating attribute.
+        """ This function updates an instance by adding
+            or modifying an attribute.
         """
-        if line == "" or line is None:
+        if not line or line is None:
             print("** class name missing **")
             return
 
-        rex = r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?'
-        match = re.search(rex, line)
+        regex = r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?'
+        match = re.search(regex, line)
+        if not match:
+            print("** class name missing **")
+            return
+
         classname = match.group(1)
         uid = match.group(2)
         attribute = match.group(3)
         value = match.group(4)
-        if not match:
-            print("** class name missing **")
-        elif classname not in storage.classes():
+
+        if classname not in storage.classes():
             print("** class doesn't exist **")
-        elif uid is None:
+        elif not uid:
             print("** instance id missing **")
         else:
-            key = "{}.{}".format(classname, uid)
+            key = f"{classname}.{uid}"
             if key not in storage.all():
                 print("** no instance found **")
             elif not attribute:
@@ -204,14 +206,14 @@ class HBNBCommand(cmd.Cmd):
                         cast = int
                 else:
                     value = value.replace('"', '')
-                attributes = storage.attributes()[classname]
-                if attribute in attributes:
+                attributes = storage.attributes().get(classname)
+                if attributes and attribute in attributes:
                     value = attributes[attribute](value)
                 elif cast:
                     try:
                         value = cast(value)
                     except ValueError:
-                        pass  # fine, stay a string then
+                        pass
                 setattr(storage.all()[key], attribute, value)
                 storage.all()[key].save()
 
