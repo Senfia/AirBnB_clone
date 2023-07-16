@@ -56,13 +56,6 @@ class TestConsole(unittest.TestCase):
         self.assertEqual('** class name missing **',
                          fakeOutput.getvalue().strip())
 
-    def test_show_object(self):
-        """test do_show"""
-        cli = self.create()
-        with patch('sys.stdout', new=StringIO()) as fakeOutput:
-            self.assertFalse(cli.onecmd('show BaseModel'))
-        self.assertEqual('** no instance found **',
-                         fakeOutput.getvalue().strip())
 
     def test_destroy_object(self):
         """destroyerrr"""

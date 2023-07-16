@@ -11,38 +11,34 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
-    """aclass that contains the entry point of the command interpreter.
+    """This class contains the entry point of the command interpreter.
     """
     prompt = '(hbnb) '
     class_list = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place',
                   'Review']
 
     def do_EOF(self, args):
-        """EOF command to exit the program.
+        """End of file command
         """
         return True
 
     def do_quit(self, args):
-        """ Quit command to exit the program.
+        """ Exit the program.
         """
         return True
 
     def emptyline(self):
-        """method to do nothing when an empty line is inputed.
+        """This does nothing when an empty line is inputed.
         """
         pass
 
     def postloop(self):
-        """method to do nothing after each console loop.
+        """ This loops the console and waits for a command
         """
         pass
 
     def do_create(self, args):
-        """Create command to create a new instance of BaseModel, save it in a
-        JSON file and prints the id.
-
-        Attributes:
-            args (str): inputted line in command prompt.
+        """Creates command to create a new instance of BaseModel.
         """
         line = args.split()
         if not self.verify_class(line):
@@ -54,11 +50,8 @@ class HBNBCommand(cmd.Cmd):
         return
 
     def do_show(self, args):
-        """Show command that prints the string representation of an instance
-        based on the class name and id.
-
-        Attributes:
-           args (str): inputted line in command prompt.
+        """Shows the command that prints string representation of an instance
+           based on the class name and id.
         """
         line = args.split()
         if not self.verify_class(line):
@@ -71,10 +64,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """Destroy command that deletes an instance based on the class name
-        and id. Save the change in JSON file.
-
-        Attributes:
-            args (str): inputted line in command prompt.
+           and id. Save the change in JSON file.
         """
         line = args.split()
         if not self.verify_class(line):
@@ -108,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         """Updates an instance based on the class name and id
-        by adding or updating attribute (save the change into the JSON file).
+           by adding or updating attribute.
         """
         line = args.split()
         if not self.verify_class(line):
@@ -123,11 +113,8 @@ class HBNBCommand(cmd.Cmd):
         models.storage.save()
 
     def default(self, args):
-        """Default method that is called when the inputted command starts
+        """This method is called when the inputted command starts
         with a class name.
-
-        Attributes:
-            args (str): The inputted line string
         """
         line = args.strip('()').split(".")
         if len(line) < 2:
@@ -162,7 +149,7 @@ class HBNBCommand(cmd.Cmd):
             if len(split3) == 0:
                 print('** no instance found **')
             elif len(split3) == 1 and type(split3[1]) == dict:
-                for k, v in split[1].items():
+                for k, v in split2[1].items():
                     HBNBCommand.do_update(self, class_name + ' ' + split3[0] +
                                           ' ' + k + ' ' + v)
             elif len(split3) == 1 and type(split3[1]) != dict:
@@ -175,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
 
     @classmethod
     def verify_class(cls, line):
-        """Static method to verify inputed class"""
+        """Verifies inputed class"""
         if len(line) == 0:
             print('** class name missing **')
             return False
@@ -186,7 +173,7 @@ class HBNBCommand(cmd.Cmd):
 
     @staticmethod
     def verify_id(line):
-        """Static method to ferify the id.
+        """Verifies the id.
         """
         if len(line) < 2:
             print('** instance id missing **')
@@ -200,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
 
     @staticmethod
     def verify_attribute(line):
-        """Static method to verify the attribute in inputted line.
+        """Veries the attribute in inputted line.
         """
         if len(line) < 3:
             print("** attribute name missing **")
