@@ -64,9 +64,9 @@ class TestBaseModel(unittest.TestCase):
         """
         self.assertTrue(len(BaseModel.__doc__) >= 1)
 
-
     def test_type(self):
-        """tests method for type testing of BaseModel
+        """
+        tests method for type testing of BaseModel
         """
         self.assertIsInstance(self.BM, BaseModel)
         self.assertEqual(type(self.BM), BaseModel)
