@@ -25,7 +25,7 @@ class TestState(unittest.TestCase):
         self.assertTrue(type(self.mystate1.name) is str)
         self.assertTrue(type(self.mystate2.id) is str)
         self.assertTrue(self.mystate1.id != self.mystate2.id)
-        test_created1 = self.test.created_at
+        test_created1 = self.mystate1.created_at
         test_created2 = self.mystate2.created_at
         self.assertIsNot(test_created1, test_created2)
         self.assertTrue(type(test_created2) is datetime.datetime)
