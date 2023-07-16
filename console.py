@@ -187,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
 
     @staticmethod
     def verify_attribute(line):
-        """Veries the attribute in inputted line.
+        """Verifies the attribute in inputted line.
         """
         if len(line) < 3:
             print("** attribute name missing **")
