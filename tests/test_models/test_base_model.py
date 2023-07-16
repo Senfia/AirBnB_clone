@@ -19,35 +19,35 @@ class TestBaseModel(unittest.TestCase):
     """
 
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(clas):
         """
         Set up class method for the doc tests
         """
-        cls.setup = inspect.getmembers(BaseModel, inspect.isfunction)
+        clas.setup = inspect.getmembers(BaseModel, inspect.isfunction)
 
     def setUp(self):
         """Set up method for object BM of BAseModel"""
         self.BM = BaseModel()
 
     def tearDown(self):
-        """Set tmp object"""
+        """Set temporary object"""
         self.BM = None
 
     def test_pep8_conformance_BaseModel(self):
         """
-        Test that base_model.py file conform to PEP8
+        Test that base_model.py file conform to pycodestyle
         """
-        pep8style = pycodestyle.StyleGuide(quiet=True)
-        result = pep8style.check_files(['models/base_model.py'])
+        pystyle = pycodestyle.StyleGuide(quiet=True)
+        result = pystyle.check_files(['models/base_model.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
     def test_pep8_conformance_test_BaseModel(self):
         """
-        Test that test_base_model.py file conform to PEP8
+        Test that test_base_model.py file conform to pycodestyle
         """
-        pep8style = pycodestyle.StyleGuide(quiet=True)
-        result = pep8style.check_files(['tests/test_models/\
+        pystyle = pycodestyle.StyleGuide(quiet=True)
+        result = pystyle.check_files(['tests/test_models/\
                                         test_base_model.py'])
         self.assertEqual(result.total_errors, 1,
                          "Found code style errors (and warnings).")
@@ -66,18 +66,18 @@ class TestBaseModel(unittest.TestCase):
 
 
     def test_type(self):
-        """test method for type testing of BaseModel
+        """tests method for type testing of BaseModel
         """
         self.assertIsInstance(self.BM, BaseModel)
         self.assertEqual(type(self.BM), BaseModel)
 
     def test_basic_attribute_set(self):
-        """test method for basic attribute assignment
+        """test method for basic attribute
         """
-        self.BM.first_name = 'Meco'
-        self.BM.last_name = 'Montes'
-        self.assertEqual(self.BM.first_name, 'Meco')
-        self.assertEqual(self.BM.last_name, 'Montes')
+        self.BM.first_name = 'Joe'
+        self.BM.last_name = 'Whyte'
+        self.assertEqual(self.BM.first_name, 'Joe')
+        self.assertEqual(self.BM.last_name, 'Whyte')
 
     def test_str(self):
         """tests str method
@@ -128,14 +128,14 @@ class TestBaseModel(unittest.TestCase):
     def test_from_dict_hard(self):
         """test for the from_dict method for BaseModel objects
         """
-        self.BM.student = 'Science'
+        self.BM.teacher = 'Geo'
         my_dict = self.BM.to_dict()
-        self.assertEqual(my_dict['student'], 'Science')
+        self.assertEqual(my_dict['teacher'], 'Geo')
         BM1 = BaseModel(**my_dict)
         self.assertEqual(BM1.created_at, self.BM.created_at)
 
     def test_unique_id(self):
-        """test for id in BaseModel objects
+        """tests for id in BaseModel objects
         """
         BM1 = BaseModel()
         BM2 = BaseModel()
@@ -143,12 +143,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(self.BM.id, BM2.id)
 
     def test_id_type_string(self):
-        """test id in BaseModel is a string
+        """tests id in BaseModel is a string
         """
         self.assertEqual(type(self.BM.id), str)
 
     def test_updated_time(self):
-        """test that updated time gets updated
+        """tests if updated time gets updated
         """
         time1 = self.BM.updated_at
         self.BM.save()
