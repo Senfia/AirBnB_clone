@@ -88,5 +88,6 @@ class TestConsole(unittest.TestCase):
         self.assertEqual("** class doesn't exist **",
                          "** class doesn't exist **")
 
+
 if __name__ == "__main__":
     unittest.main()
