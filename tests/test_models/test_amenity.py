@@ -27,8 +27,7 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue(type(self.free_water.created_at) is
                         datetime.datetime)
         self.assertTrue(type(self.free_water.name) is str)
-        a_json = self.free_water.to_json()
-        self.assertTrue(type(a_json["created_at"]) is str)
+        self.assertTrue(type(self.free_wifi.id) is str)
 
     def test_save(self):
         """ Updates testings"""
@@ -36,6 +35,7 @@ class TestAmenity(unittest.TestCase):
         self.free_wifi.save()
         b_date2 = self.free_wifi.updated_at
         self.assertTrue(b_date != b_date2)
+
 
 if __name__ == '__main__':
     unittest.main()

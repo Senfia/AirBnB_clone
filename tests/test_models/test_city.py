@@ -44,5 +44,6 @@ class TestCity(unittest.TestCase):
         updated_save = self.city1.updated_at
         self.assertFalse(test_updated == updated_save)
 
+
 if __name__ == '__main__':
     unittest.main()

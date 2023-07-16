@@ -3,7 +3,7 @@
 This is Place class unittest module. This class tests Place class.
 """
 import unittest
-#import uuid
+import uuid
 import datetime
 from models.place import Place
 
